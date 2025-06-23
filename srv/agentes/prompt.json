@@ -1,0 +1,21 @@
+{
+    
+    "modelName": "gpt-4.1-nano",
+    "agenteOrdenCompra" : {
+        "prompt" : "Debes crear un resumen considerando las siguientes palabras claves: {key_words}",
+        "keyWords" : ["aaa", "bbb", "ccc"]
+    },
+    "agenteFinanciero" : {
+        "prompt" : "Debes crear un resumen considerando las siguientes palabras claves: {key_words}",
+        "keyWords" : ["aaa", "bbb", "ccc"]
+    },
+    "agenteContratoMarco" : {
+        "prompt" : "Debes crear un resumen considerando las siguientes palabras claves: {key_words}",
+        "keyWords" : ["aaa", "bbb", "ccc"]
+    },
+    "agenteResumenFinal" : {
+        "prompt" : "Debes crear un resumen considerando las siguientes palabras claves: {key_words}",
+        "keyWords" : ["aaa", "bbb", "ccc"]
+    }
+
+}

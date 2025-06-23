@@ -1,0 +1,58 @@
+{
+  "name": "cap-aitest",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap/cds": "^8",
+    "@sap/xsenv": "^5.6.1",
+    "@sap/xssec": "^4",
+    "express": "^4",
+    "passport": "^0.7.0",
+    "@sap-ai-sdk/langchain": "^1.14.0"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1",
+    "@sap-ai-sdk/langchain": "^1.14.0",
+    "@sap/cds-dk": "^8"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "hybrid": "cds watch --profile hybrid"
+  },
+  "cds": {
+    "server": {
+      "index": "./server.js"
+    },
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      },
+      "[hybrid]": {
+        "custom-service:default_aicore": {
+          "binding": {
+            "type": "cf",
+            "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+            "org": "globant-ssa-dev",
+            "space": "DEV",
+            "instance": "default_aicore",
+            "key": "default_aicore-key",
+            "resolved": false
+          },
+          "vcap": {
+            "name": "custom-service:default_aicore"
+          }
+        }
+      }
+    },
+    "sql": {
+      "native_hana_associations": false
+    }
+  }
+}
