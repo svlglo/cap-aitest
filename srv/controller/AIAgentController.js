@@ -60,18 +60,19 @@ class AIAgent {
             const response = await chatClient.invoke("What's the capital of France?");
             console.log(response.content);
             // Create a prompt template
-            const promptTemplate = ChatPromptTemplate.fromMessages([
+         /*   const promptTemplate = ChatPromptTemplate.fromMessages([
                 ['system', 'Answer the following in {language}:'],
                 ['user', '{text}']
             ]);
+            */
     
             console.log('reaching this point');
     
             // Create an output parser
-            const parser = new StringOutputParser();
+          //  const parser = new StringOutputParser();
     
             // Chain together template, client and parser
-            llmChain = promptTemplate.pipe(chatClient).pipe(parser);
+          //  llmChain = promptTemplate.pipe(chatClient).pipe(parser);
           
         } catch (error) {
           console.log(error);
