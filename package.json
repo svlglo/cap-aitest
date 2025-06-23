@@ -50,6 +50,12 @@
           "vcap": {
             "name": "custom-service:default_aicore"
           }
+        },
+        "aicore-destination": {
+          "kind": "xsuaa",
+          "credentials": {
+            "destination": "aicore-destination"
+          }
         }
       }
     },

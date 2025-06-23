@@ -26,7 +26,7 @@ modules:
     requires:
       - name: cap-aitest-db
       - name: cap-aitest-auth
-
+      - name: cap-aitest-dest
   - name: cap-aitest-db-deployer
     type: hdb
     path: gen/db
@@ -50,3 +50,8 @@ resources:
       config:
         xsappname: cap-aitest-${org}-${space}
         tenant-mode: dedicated
+  - name: cap-aitest-dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

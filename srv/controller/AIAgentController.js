@@ -54,7 +54,9 @@ class AIAgent {
 
            // Initialize the client
             //const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4o' });
-            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano' });
+            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano', destinationName : 'aicore-destination' });
+
+
             //const chatClient = new AzureOpenAiChatClient({ modelName: 'amazon--nova-micro' });
             
             const response = await chatClient.invoke("What's the capital of France?");
