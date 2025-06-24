@@ -1,4 +1,6 @@
 {
+  "xsappname": "cap-aitest",
+  "tenant-mode": "dedicated",
   "scopes": [],
   "attributes": [],
   "role-templates": []

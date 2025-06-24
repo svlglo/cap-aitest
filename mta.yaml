@@ -41,6 +41,7 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+
   - name: cap-aitest-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -48,10 +49,12 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: cap-aitest-${org}-${space}
+        xsappname: cap-aitest
         tenant-mode: dedicated
+        
   - name: cap-aitest-dest
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
       service-plan: lite
+

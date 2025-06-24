@@ -6,5 +6,7 @@ service Servicios {
     entity resumen as projection on db.Documento excluding {files};
 
     function uploadDocumento(campo: String)  returns String;
+    function obtenerResumen(id_sociedad: String, id_documento: String, idioma_user: String) returns String;
+
 
 }
