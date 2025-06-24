@@ -32,6 +32,12 @@
       "index": "./server.js"
     },
     "requires": {
+      "AI_CORE_API": {
+      "kind": "rest",
+        "credentials": {
+          "destination": "aicore-destination"
+        }
+      },
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
@@ -49,12 +55,6 @@
           },
           "vcap": {
             "name": "custom-service:default_aicore"
-          }
-        },
-        "aicore-destination": {
-          "kind": "xsuaa",
-          "credentials": {
-            "destination": "aicore-destination"
           }
         }
       }

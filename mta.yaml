@@ -51,10 +51,22 @@ resources:
       config:
         xsappname: cap-aitest
         tenant-mode: dedicated
-        
+
   - name: cap-aitest-dest
     type: org.cloudfoundry.managed-service
     parameters:
-      service: destination
-      service-plan: lite
+        service: destination
+        service-plan: lite
+        config:
+          HTML5Runtime_enabled: true
+          version: 1.0.0
+          init_data:
+            instance:
+              destinations:
+                - Name: "aicore-destination"
+                  Authentication: "OAuth2ClientCredentials"
+                  Type: "HTTP"
+                  ProxyType: "Internet"
+                  URL: "https://api.ai.prod.us-east-1.aws.ml.hana.ondemand.com"
+                  tokenServiceURL: "https://ai-dev-uat-1og4vkih.authentication.us10.hana.ondemand.com/oauth/token"
 
