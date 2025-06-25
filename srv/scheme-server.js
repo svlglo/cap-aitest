@@ -11,6 +11,7 @@ export default cds.service.impl(async (srv) => {
         agee.aitest();
 
             // Responder inmediatamente
+            console.log("Documento recibido exitosamente, tracking id 007");
             return { 
                 message: "Documento recibido exitosamente",
                 trackingId: "007" 

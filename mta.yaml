@@ -27,6 +27,8 @@ modules:
       - name: cap-aitest-db
       - name: cap-aitest-auth
       - name: cap-aitest-dest
+      - name: cap-aitest-ai  
+      
   - name: cap-aitest-db-deployer
     type: hdb
     path: gen/db
@@ -36,6 +38,14 @@ modules:
       - name: cap-aitest-db
 
 resources:
+  - name: cap-aitest-ai
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: aicore
+      service-plan: extended
+      config:
+        usage: 'development'
+
   - name: cap-aitest-db
     type: com.sap.xs.hdi-container
     parameters:
@@ -68,5 +78,5 @@ resources:
                   Type: "HTTP"
                   ProxyType: "Internet"
                   URL: "https://api.ai.prod.us-east-1.aws.ml.hana.ondemand.com"
-                  tokenServiceURL: "https://ai-dev-uat-1og4vkih.authentication.us10.hana.ondemand.com/oauth/token"
+
 

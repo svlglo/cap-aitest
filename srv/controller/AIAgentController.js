@@ -54,7 +54,7 @@ class AIAgent {
 
            // Initialize the client
             //const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4o' });
-            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano', destinationName: 'AI_CORE_API'});
+            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano', destinationName: 'aicore-destination'});
 
 
             //const chatClient = new AzureOpenAiChatClient({ modelName: 'amazon--nova-micro' });
@@ -68,7 +68,7 @@ class AIAgent {
             ]);
             */
     
-            console.log('reaching this point');
+          //  console.log('reaching this point');
     
             // Create an output parser
           //  const parser = new StringOutputParser();
@@ -81,20 +81,7 @@ class AIAgent {
         }
            
     
-        try {
-               // Invoke the chain
-               let respuesta = await llmChain.invoke({
-                language: 'Spanish',
-                text: 'Are you aware about your context window size?'
-            });
 
-            
-            console.log(respuesta.content);
-
-          
-        } catch (error) {
-          console.log(error);
-        }
        
     
         }

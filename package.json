@@ -32,7 +32,7 @@
       "index": "./server.js"
     },
     "requires": {
-      "AI_CORE_API": {
+      "aicore-destination": {
       "kind": "rest",
         "credentials": {
           "destination": "aicore-destination"
