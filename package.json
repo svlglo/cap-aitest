@@ -14,7 +14,8 @@
     "express": "^4",
     "passport": "^0.7.0",
     "@langchain/core": "0.3.61",
-    "@sap-ai-sdk/langchain": "^1.14.0"
+    "@sap-ai-sdk/langchain": "^1.14.0",
+    "@cap-js-community/odata-v2-adapter": "^1.14.4"
 
   },
   "devDependencies": {
@@ -32,10 +33,10 @@
       "index": "./server.js"
     },
     "requires": {
-      "aicore-destination": {
-      "kind": "rest",
-        "credentials": {
-          "destination": "aicore-destination"
+      "SAP_AI_CORE": {
+        "kind": "rest",
+          "credentials": {
+            "destination": "aicore-destination"
         }
       },
       "[production]": {
@@ -43,6 +44,11 @@
         "auth": "xsuaa"
       },
       "[hybrid]": {
+        "SAP_AI_CORE": {
+          "credentials": {
+            "destination": "aicore-destination"
+          }
+        },
         "custom-service:default_aicore": {
           "binding": {
             "type": "cf",

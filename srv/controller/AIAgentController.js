@@ -12,8 +12,6 @@ const __dirname = path.dirname(__filename);
 class AIAgent {
     constructor(tipoAgente) {
 
-      
-      //obtener prompt segun tarea
       const promptPath = path.join(__dirname, '../agentes/prompt.json');
       const promptData = JSON.parse(fs.readFileSync(promptPath, 'utf8'));
 
@@ -21,7 +19,7 @@ class AIAgent {
 
 
       //cargar settings agente
-      const llmName = new AzureOpenAiChatClient({ modelName: promptData.modelName });
+      const llmName = new AzureOpenAiChatClient({ modelName: promptData.modelName , destinationName: 'SAP_AI_CORE'});
       
       const promptTemplate = ChatPromptTemplate.fromMessages([
         ['system', this.promptAgente.prompt],
@@ -46,35 +44,16 @@ class AIAgent {
     }
 
  
-    async aitest() {
+    async aitest(texto='genera un resumen de Globant') {
 
-      let llmChain;
 
         try {
 
-           // Initialize the client
-            //const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4o' });
-            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano', destinationName: 'aicore-destination'});
+            const chatClient = new AzureOpenAiChatClient({ modelName: 'gpt-4.1-nano', destinationName: 'SAP_AI_CORE'});
 
-
-            //const chatClient = new AzureOpenAiChatClient({ modelName: 'amazon--nova-micro' });
-            
-            const response = await chatClient.invoke("What's the capital of France?");
+            const response = await chatClient.invoke(texto);
             console.log(response.content);
-            // Create a prompt template
-         /*   const promptTemplate = ChatPromptTemplate.fromMessages([
-                ['system', 'Answer the following in {language}:'],
-                ['user', '{text}']
-            ]);
-            */
-    
-          //  console.log('reaching this point');
-    
-            // Create an output parser
-          //  const parser = new StringOutputParser();
-    
-            // Chain together template, client and parser
-          //  llmChain = promptTemplate.pipe(chatClient).pipe(parser);
+
           
         } catch (error) {
           console.log(error);

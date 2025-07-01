@@ -1,4 +1,6 @@
 import cds from '@sap/cds';
+import  cov2ap  from "@cap-js-community/odata-v2-adapter";
+
 
 // Enable CORS for development and production
 cds.on('bootstrap', (app) => {
@@ -29,6 +31,10 @@ cds.on('bootstrap', (app) => {
       next();
     }
   });
+
+  app.use(cov2ap());
+
+
 });
 
 export default cds.server;

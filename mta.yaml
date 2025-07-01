@@ -78,5 +78,5 @@ resources:
                   Type: "HTTP"
                   ProxyType: "Internet"
                   URL: "https://api.ai.prod.us-east-1.aws.ml.hana.ondemand.com"
-
+    
 

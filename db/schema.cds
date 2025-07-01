@@ -28,7 +28,7 @@ entity Documento: cuid, managed {
     prompt : LargeString;
     key_words : LargeString;
     tracking_id: UUID;
-    company: String;
+    company: String; 
     langu: String;
     tipo_doc : TipoDoc;
     files : Association to many File  on files.documento = $self;
