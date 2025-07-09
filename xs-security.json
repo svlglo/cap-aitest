@@ -1,7 +1,20 @@
 {
   "xsappname": "cap-aitest",
   "tenant-mode": "dedicated",
-  "scopes": [],
   "attributes": [],
-  "role-templates": []
+  "scopes": [
+    {
+      "name": "auth.user",
+      "description": "AUTH"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Token_Exchange",
+      "description": "AUTH",
+      "scope-references": [
+        "auth.user"
+      ]
+    }
+  ]
 }

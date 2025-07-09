@@ -3,49 +3,46 @@ namespace meli.aitest.db;
 using {cuid, managed} from '@sap/cds/common';
 
 type FileData {
-    tipo_doc: TipoDoc;
-    mimeType: String;
-    content: String //podria ser base64 o binario
+    documentType    :String;
+    mimeType        :String;
+    content         :LargeString;
+    fileName        :String;
 }
 
 type HeaderData {
-    id_sap: String;
-    type_documento: String;
-    created_by: String;
-    created_date : Date
+    idSap           :String;
+    documentType    :TypeDoc;
+    createdBy       :String;
+    createdDate     :Date;
+    companyCode     :String;
 }
 
-type TipoDoc  : String enum {
-  OrdenCompra;
-  Contrato;
-  DocFinanciero;
+type TypeDoc    :String 
+    enum {
+            order;
+            contract;
+            financial;
+        }
+
+entity Document         :cuid, managed {
+    idSap               : String;  
+    summary             : LargeString;
+    prompt              : LargeString;
+    keyWords            : LargeString;
+    trackingId          : UUID;
+    companyCode         : String;
+    langu               : String;
+    documentType        : TypeDoc;
+    files               : Association to many File  on files.document = $self;
 }
 
-//documento creado en esquema
-entity Documento: cuid, managed {
-    id_sap              : String;  
-    resume             : LargeString;
-    prompt : LargeString;
-    key_words : LargeString;
-    tracking_id: UUID;
-    company: String; 
-    langu: String;
-    tipo_doc : TipoDoc;
-    files : Association to many File  on files.documento = $self;
+entity File           :cuid, managed {
+    idSap             :String;  
+    document          :Association to Document;
+    fileName          :String;
+    mimeType          :String;
+    summary           :LargeString;
+    prompt            :LargeString;
+    keyWords          :LargeString;
+    logReport         :LargeString;
 }
-
-//almacenar los archivos asociados al documento, aqui estara en resumen por archivo
-entity File: cuid, managed {
-    id_sap              : String;  
-    documento      : Association to Documento;
-
-    file_name: String;
-    mimeType : String;
-    resume : LargeString;
-    prompt : LargeString;
-    key_words : LargeString;
-    log_report: LargeString;
-}
-
-
-

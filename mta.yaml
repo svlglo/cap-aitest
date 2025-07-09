@@ -27,7 +27,8 @@ modules:
       - name: cap-aitest-db
       - name: cap-aitest-auth
       - name: cap-aitest-dest
-      - name: cap-aitest-ai  
+      - name: cap-aitest-con
+    #  - name: cap-aitest-ai  
       
   - name: cap-aitest-db-deployer
     type: hdb
@@ -38,13 +39,13 @@ modules:
       - name: cap-aitest-db
 
 resources:
-  - name: cap-aitest-ai
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: aicore
-      service-plan: extended
-      config:
-        usage: 'development'
+ # - name: cap-aitest-ai
+  #  type: org.cloudfoundry.managed-service
+   # parameters:
+    #  service: aicore
+     # service-plan: extended
+      #config:
+       # usage: 'development'
 
   - name: cap-aitest-db
     type: com.sap.xs.hdi-container
@@ -62,21 +63,33 @@ resources:
         xsappname: cap-aitest
         tenant-mode: dedicated
 
-  - name: cap-aitest-dest
+
+  - name: cap-aitest-con
     type: org.cloudfoundry.managed-service
     parameters:
-        service: destination
-        service-plan: lite
-        config:
-          HTML5Runtime_enabled: true
-          version: 1.0.0
-          init_data:
-            instance:
-              destinations:
-                - Name: "aicore-destination"
-                  Authentication: "OAuth2ClientCredentials"
-                  Type: "HTTP"
-                  ProxyType: "Internet"
-                  URL: "https://api.ai.prod.us-east-1.aws.ml.hana.ondemand.com"
+      service: connectivity
+      service-plan: lite
+
+  - name: cap-aitest-dest
+    type: org.cloudfoundry.managed-service
+    requires:
+      - name: srv-api
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: srv-api
+                URL: ~{srv-api/srv-url}
+                Authentication: NoAuthentication
+                Type: HTTP
+                ProxyType: Internet
+                HTML5.ForwardAuthToken: true
+                HTML5.DynamicDestination: true
+
     
 

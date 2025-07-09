@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Helpers {
+class Helper {
     constructor() {
       //cargar settings helpers
     }
@@ -13,4 +13,4 @@ class Helpers {
 
 }
 
-export default Helpers;
+export default Helper;

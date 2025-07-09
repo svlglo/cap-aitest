@@ -7,22 +7,24 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.14.4",
     "@cap-js/hana": "^1",
+    "@langchain/core": "0.3.61",
+    "@sap-ai-sdk/langchain": "^1.14.0",
+    "@sap-ai-sdk/orchestration": "^1.15.0",
     "@sap/cds": "^8",
     "@sap/xsenv": "^5.6.1",
     "@sap/xssec": "^4",
     "express": "^4",
+    "mammoth": "^1.9.1",
     "passport": "^0.7.0",
-    "@langchain/core": "0.3.61",
-    "@sap-ai-sdk/langchain": "^1.14.0",
-    "@cap-js-community/odata-v2-adapter": "^1.14.4"
-
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8"
-
   },
   "scripts": {
     "start": "cds-serve",
@@ -30,37 +32,35 @@
   },
   "cds": {
     "server": {
-      "index": "./server.js"
+      "index": "./server.js",
+      "body_parser": {
+        "limit": "100mb"
+      }
     },
     "requires": {
-      "SAP_AI_CORE": {
-        "kind": "rest",
-          "credentials": {
-            "destination": "aicore-destination"
+      "destinations": true,
+      "AICORE-DESTINATION": {
+        "credentials": {
+          "destination": "AICORE-DESTINATION"
         }
       },
+      "aicore-destination_v2_MELI": {
+        "credentials": {
+          "destination": "aicore-destination_v2_MELI"
+        }
+      },
+      
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
       },
       "[hybrid]": {
-        "SAP_AI_CORE": {
-          "credentials": {
-            "destination": "aicore-destination"
-          }
+        "auth": {
+          "kind": "mocked"
         },
-        "custom-service:default_aicore": {
-          "binding": {
-            "type": "cf",
-            "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-            "org": "globant-ssa-dev",
-            "space": "DEV",
-            "instance": "default_aicore",
-            "key": "default_aicore-key",
-            "resolved": false
-          },
-          "vcap": {
-            "name": "custom-service:default_aicore"
+        "AICORE-DESTINATION": {
+          "credentials": {
+            "destination": "AICORE-DESTINATION"
           }
         }
       }
