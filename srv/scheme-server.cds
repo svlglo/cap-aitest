@@ -5,5 +5,6 @@ service Services {
     function testAI(campo: String)  returns String;
     function getSummary(company_code: String, id_document: String, language_user: String) returns String;
     action uploadDocument(header: db.HeaderData, files: array of db.FileData )       returns String;
+    action testWord(header: db.HeaderData, files: array of db.FileData )       returns String;
 
 }

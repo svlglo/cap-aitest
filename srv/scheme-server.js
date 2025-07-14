@@ -51,8 +51,17 @@ export default cds.service.impl(async (srv) => {
 
   srv.on('getSummary', async (req) => {
 
+    const pro = new Proceso();
+    let summary = await pro.getSummaryDocument(req.data?.company_code, req.data?.id_document, req.data?.language_user);
 
-    return `Resumen generado por ia : ${req.data?.company_code} ${req.data?.id_document} ${req.data?.language_user}`;
+    if(summary !=""){
+
+      return summary;
+
+    }else{
+      return "No summary available";
+    }
+
 
 
   });
@@ -111,6 +120,24 @@ export default cds.service.impl(async (srv) => {
       console.error('AI Core connection test failed:', error);
       throw error;
     }
+  });
+
+
+  
+  srv.on("testWord", async (req) => {
+
+    const pro = new Proceso();
+    const help = new Helpers();
+
+    const header = req.data.header;
+    const files = req.data.files;
+
+    const trackingId = help.generateTrackingId();
+
+    return await pro.procesarTestWord(header, files, trackingId);
+
+
+
   });
 
 

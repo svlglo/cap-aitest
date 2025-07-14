@@ -17,15 +17,32 @@ class AIAssistant {
       try {
         let promptPath, promptData;
           //get prompt 
-          if(typeAssistant == "assistantExcel"){
+          if(typeAssistant == "excel"){
              promptPath = path.join(__dirname, '../assistant/prompt_excel.txt');
              promptData = fs.readFileSync(promptPath, 'utf8');
           }
 
-          if(typeAssistant == "agentFinalSummary"){
+          if(typeAssistant == "word" || typeAssistant == "pdf" ){
+            promptPath = path.join(__dirname, '../assistant/prompt_word_pdf.txt');
+            promptData = fs.readFileSync(promptPath, 'utf8');
+          }
+
+          if(typeAssistant == "images"){
+            promptPath = path.join(__dirname, '../assistant/prompt_images.txt');
+            promptData = fs.readFileSync(promptPath, 'utf8');
+          }
+
+          if(typeAssistant == "finalSummary"){
             promptPath = path.join(__dirname, '../assistant/prompt_final.txt');
             promptData = fs.readFileSync(promptPath, 'utf8');
          }
+
+         if(typeAssistant == "translate"){
+          promptPath = path.join(__dirname, '../assistant/prompt_translate.txt');
+          promptData = fs.readFileSync(promptPath, 'utf8');
+        }
+
+         
           
           this.promptAssistant = promptData; 
           //settings agent
@@ -60,8 +77,15 @@ class AIAssistant {
 
     async generateSummary(ResumeFiles){
       let response = await this.assistent.invoke({
-        resumeFiles: ResumeFiles,
-        text: 'debe estar en español'
+        text: ResumeFiles
+       });
+       return response;
+    }
+
+    async generateTranslate(text, language_user){
+      let response = await this.assistent.invoke({
+        text: text,
+        langu: language_user
        });
        return response;
     }
